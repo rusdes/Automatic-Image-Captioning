@@ -43,14 +43,24 @@ def get_loader(transform,
     # Based on mode (train, val, test), obtain img_folder and annotations_file.
     if mode == 'train':
         if vocab_from_file==True: assert os.path.exists(vocab_file), "vocab_file does not exist.  Change vocab_from_file to False to create vocab_file."
-        img_folder = os.path.join(cocoapi_loc, 'cocoapi/images/train2014/')
-        annotations_file = os.path.join(cocoapi_loc, 'cocoapi/annotations/captions_train2014.json')
+        #img_folder = os.path.join(cocoapi_loc, 'cocoapi\\images\\train2014\\')
+        img_folder = "C:/Users/rushi/Desktop/Coding/UdacityCourses/Computer_Vision/Image-Captioning-Project/CVND---Image-Captioning-Project-master/opt/cocoapi/images/train2014/"
+        img_folder = os.path.normpath(img_folder)
+       #annotations_file = os.path.join(cocoapi_loc, 'cocoapi\\annotations\\captions_train2014.json')
+        annotations_file = "C:/Users/rushi/Desktop/Coding/UdacityCourses/Computer_Vision/Image-Captioning-Project/CVND---Image-Captioning-Project-master/opt/cocoapi/annotations/captions_train2014.json"
+        annotations_file = os.path.normpath(annotations_file)
     if mode == 'test':
         assert batch_size==1, "Please change batch_size to 1 if testing your model."
         assert os.path.exists(vocab_file), "Must first generate vocab.pkl from training data."
         assert vocab_from_file==True, "Change vocab_from_file to True."
-        img_folder = os.path.join(cocoapi_loc, 'cocoapi/images/test2014/')
-        annotations_file = os.path.join(cocoapi_loc, 'cocoapi/annotations/image_info_test2014.json')
+        #img_folder = os.path.join(cocoapi_loc, 'cocoapi\\images\\test2014\\')
+        img_folder = os.path.normpath("C:/Users/rushi/Desktop/Coding/UdacityCourses/Computer_Vision/Image-Captioning-Project/CVND---Image-Captioning-Project-master/opt/cocoapi/images/test2014/")
+        #img_folder = os.path.normpath(img_folder)
+
+        
+        #annotations_file = os.path.join(cocoapi_loc, 'cocoapi\\annotations\\image_info_test2014.json')
+        annotations_file = "C:/Users/rushi/Desktop/Coding/UdacityCourses/Computer_Vision/Image-Captioning-Project/CVND---Image-Captioning-Project-master/opt/cocoapi/annotations/image_info_test2014.json"
+        annotations_file = os.path.normpath(annotations_file)
 
     # COCO caption dataset.
     dataset = CoCoDataset(transform=transform,
